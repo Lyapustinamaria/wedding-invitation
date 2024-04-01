@@ -3,65 +3,52 @@ import { useState } from "react";
 import axios from "axios";
 
 const InformationAboutGuests = () => {
-    const [attendingWedding, setAttendingWedding] = useState(false)
-    const [fullName, setFullName] = useState('')
-    const [attendingWithPartner, setAttendingWithPartner] = useState(false)
-    const [partnerName, setPartnerName] = useState('')
-    const [location, setLocation] = useState('')
-    const [allergy, setAllergy] = useState('')
-    const [hobby, setHobby] = useState('')
-    const [isSend, setIsSend] = useState(false)
+
+    const [formData, setFormData] = useState({
+        attendingWedding: "",
+        fullName: "",
+        attendingWithPartner: "",
+        partnerName: "",
+        armenia: false,
+        georgia: false,
+        allergy: "",
+        hobby: ""
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value,
+        }));
+    };  
+
+    const handleCheckboxChange = (event) => {
+        const { name, checked } = event.target;
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: checked,
+        }));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = {
-            attendingWedding,
-            fullName,
-            attendingWithPartner,
-            partnerName,
-            location,
-            allergy,
-            hobby
-        };
-
+        
+        const formDataToSend = new FormData();
+        for (const key in formData) {
+            formDataToSend.append(key, formData[key]);
+        }
+    
         try {
             const response = await axios.post(
-                "https://script.google.com/macros/s/AKfycbwP7t3FjH49r1kyvhtUc5swPWwMfORFOV_VEMJcGZgX3XfjR6nZCMrKqWyNHljOossC/exec",
-                formData
+                "https://script.google.com/macros/s/AKfycbzaRgAfDP7HbKBNEWFugVAq0Yp0Qsd81O8fwpHYWOoLjh0D_HJkRHyp3QPvzB0bthLX/exec",
+                formDataToSend
             );
             console.log(response.data);
         } catch (error) {
             console.error(error);
         }
     };
-
-    const handleAttendingWeddingChange = (e) => {
-        setAttendingWedding(e.target.value)
-    }
-
-    const handleFullNameChange = (e) => {
-        setFullName(e.target.value)
-    }
-
-    const handleAttendingWithPartnerChange = (e) => {
-        setAttendingWithPartner(e.target.value)
-    }
-
-    const handlePartnerNameChange = (e) => {
-        setPartnerName(e.target.value)
-    }
-
-    const handleLocationChange = (e) => {
-        setLocation(e.target.value)
-    }
-
-    const handleAllergyChange = (e) => {
-        setAllergy(e.target.value)
-    }
-
-    const handleHobbyChange = (e) => {
-        setHobby(e.target.value)
-    }
 
     return (
         <div class="container-fluid mt-5">
@@ -73,7 +60,7 @@ const InformationAboutGuests = () => {
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-3">
                     <p>
                     Оставьте нам основную информацию о себе, чтобы мы могли лучше подготовиться к мероприятию. 
                     А также следите за нашим телеграм-ботом, он будет присылать вам информацию обо всех обновлениях.
@@ -83,117 +70,166 @@ const InformationAboutGuests = () => {
             <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
-                    <form onSubmit={handleSubmit}>
+                    <form 
+                        onSubmit={handleSubmit}
+                    >
                         <div class="mb-3 row">
-                            <p>
+                            <p class='user-form'>
                                 Вы планируете к нам присоединиться?
                             </p>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                                <label class="form-check-label" for="flexRadioDefault1">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="attendingWedding" 
+                                    id="attendingWedding1"
+                                    value="Да"
+                                    checked={formData.attendingWedding === "Да"}
+                                    onChange={handleChange}
+                                />
+                                <label class="form-check-label" for="attendingWedding1">
                                     Да
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
-                                <label class="form-check-label" for="flexRadioDefault2">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="attendingWedding" 
+                                    id="attendingWedding2"
+                                    value="Нет"
+                                    checked={formData.attendingWedding === "Нет"}
+                                    onChange={handleChange}
+                                />
+                                <label class="form-check-label" for="attendingWedding2">
                                     Нет
                                 </label>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <p>
+                            <p class='user-form'>
                                 Укажите свои фамилию и имя
                             </p>
                             <div class="form">
                                 <input
                                     type="text"
                                     class="form-control"
+                                    name = "fullName"
                                     placeholder="Иванов Иван"
-                                    value={fullName}
-                                    onChange={handleFullNameChange}
+                                    value={formData.fullName}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <p>
+                            <p class='user-form'>
                                 Вы будете один или с партнером?
                             </p>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                                <label class="form-check-label" for="flexRadioDefault1">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="attendingWithPartner" 
+                                    id="single"
+                                    value="Один"
+                                    checked={formData.attendingWithPartner === "Один"}
+                                    onChange={handleChange}
+                                />
+                                <label class="form-check-label" for="single">
                                     Один
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
-                                <label class="form-check-label" for="flexRadioDefault2">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="attendingWithPartner" 
+                                    id="withPartner"
+                                    value="С партнером"
+                                    checked={formData.attendingWithPartner === "С партнером"}
+                                    onChange={handleChange}
+                                />
+                                <label class="form-check-label" for="withPartner">
                                     С партнером
                                 </label>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <p>
+                            <p class='user-form'>
                                 Укажите имя партнера
                             </p>
                             <div class="form">
                                 <input
                                     type="text"
                                     class="form-control"
-                                    placeholder="Иванов Иван"
-                                    value={partnerName}
-                                    onChange={handlePartnerNameChange}
+                                    name = "partnerName"
+                                    value={formData.partnerName}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <p>
+                            <p class='user-form'>
                                 В каких странах вы будете с нами?
                             </p>
                             <p class="help-text">
                                 Если вы планируете быть с нами в обеих странах, то выбирайте оба вариант.
                             </p>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input 
+                                    class="form-check-input" 
+                                    type="checkbox" 
+                                    id="georgia" 
+                                    name="georgia" 
+                                    checked={formData.georgia} 
+                                    onChange={handleCheckboxChange} 
+                                />
+                                <label class="form-check-label" for="georgia">
                                     Грузия
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input 
+                                    class="form-check-input" 
+                                    type="checkbox" 
+                                    id="armenia" 
+                                    name="armenia" 
+                                    checked={formData.armenia} 
+                                    onChange={handleCheckboxChange}
+                                />
+                                <label class="form-check-label" for="armenia">
                                     Армения
                                 </label>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <p>
+                            <p class='user-form'>
                                 Пожалуйста, расскажите нам побольше о себе и своем партнере
                             </p>
-                            <p>
+                            <p class='user-form'>
                                 Есть ли у вас аллергия на какие-то продукты?
                             </p>
                             <div class="form">
                                 <input
                                     type="text"
                                     class="form-control"
-                                    placeholder="Иванов Иван"
-                                    value={allergy}
-                                    onChange={handleAllergyChange}
+                                    name = "allergy"
+                                    value={formData.allergy}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <p>
+                            <p class='user-form'>
                                 Какую музыку вы любите? Укажите три свои любимые песни
                             </p>
                             <div class="form">
                                 <input
                                     type="text"
                                     class="form-control"
-                                    placeholder="Иванов Иван"
-                                    value={hobby}
-                                    onChange={handleHobbyChange}
+                                    name="hobby"
+                                    value={formData.hobby}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
