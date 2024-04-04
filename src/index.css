@@ -183,15 +183,3 @@ input::placeholder{
   background-color: #679936;
   border-color: #679936;
 }
-
-.modal-content {
-  width: 150px;
-  height: 200px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Тень */
-  border-radius: 30px; /* Бордер-радиус */
-  background-color: #E5DFCD; /* Цвет фона */
-}
-
-.modal-text{
-  text-align: center;
-}

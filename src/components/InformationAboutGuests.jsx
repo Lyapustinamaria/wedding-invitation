@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import Modal from "react-modal";
 
 const InformationAboutGuests = () => {
 
@@ -16,7 +15,6 @@ const InformationAboutGuests = () => {
         hobby: ""
     });
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -51,8 +49,6 @@ const InformationAboutGuests = () => {
         } catch (error) {
             console.error(error);
         }
-
-        setModalIsOpen(true);
     };
 
     return (
@@ -116,14 +112,14 @@ const InformationAboutGuests = () => {
                         </div>
                         <div class="mb-3 row">
                             <p class='user-form'>
-                                Укажите свои фамилию и имя
+                                Как Вас зовут?
                             </p>
                             <div class="form">
                                 <input
                                     type="text"
                                     class="form-control"
                                     name = "fullName"
-                                    placeholder="Иванов Иван"
+                                    placeholder="Иван Иванов"
                                     value={formData.fullName}
                                     onChange={handleChange}
                                 />
@@ -164,7 +160,7 @@ const InformationAboutGuests = () => {
                         </div>
                         <div class="mb-3 row">
                             <p class='user-form'>
-                                Укажите имя партнера
+                                Как зовут партнера?
                             </p>
                             <div class="form">
                                 <input
@@ -193,7 +189,7 @@ const InformationAboutGuests = () => {
                                     onChange={handleCheckboxChange} 
                                 />
                                 <label class="form-check-label" for="georgia">
-                                    Грузия (официальная часть)
+                                    Грузия (церемония)
                                 </label>
                             </div>
                             <div class="form-check">
@@ -212,7 +208,7 @@ const InformationAboutGuests = () => {
                         </div>
                         <div class="mb-3 row">
                             <p class="more-info">
-                                Пожалуйста, расскажите нам побольше о себе и своем партнере
+                                Мы все разные и нам важно узнать о вас кое-что еще
                             </p>
                             <p class='user-form'>
                                 Есть ли у вас аллергия на какие-то продукты?
@@ -242,24 +238,29 @@ const InformationAboutGuests = () => {
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <button className="btn btn-primary submit-button" type="submit">
+                            <button className="btn btn-primary submit-button" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Отправить
                             </button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Спасибо, что поделились информацией о себе.</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Мы будем с нетерпением ждать вас на нашей свадьбе!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="col-sm-3"></div>
-                <Modal
-                    isOpen={modalIsOpen}
-                    class="modal-content"
-                    overlayClassName="modal-overlay"
-                    onRequestClose={() => setModalIsOpen(false)}
-                    contentLabel="Успешная отправка"
-                >
-                    <h3 class="modal-text">Спасибо, что поделились информацией о себе.</h3>
-                    <p class="modal-text">Мы будем с нетерпением ждать на нашей свадьбе!</p>
-                    <button class="btn btn-light" onClick={() => setModalIsOpen(false)}>Закрыть</button>
-                </Modal>
             </div>
         </div>
     )
