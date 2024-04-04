@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/wedding-invitation/static/css/main.022a5d01.css",
-    "main.js": "/wedding-invitation/static/js/main.d537b590.js",
+    "main.css": "/wedding-invitation/static/css/main.fe1830b9.css",
+    "main.js": "/wedding-invitation/static/js/main.0e8c4070.js",
     "static/media/TT Ramillas Initials Trial Black.ttf": "/wedding-invitation/static/media/TT Ramillas Initials Trial Black.d30c33bb2de6e0848882.ttf",
     "index.html": "/wedding-invitation/index.html",
-    "main.022a5d01.css.map": "/wedding-invitation/static/css/main.022a5d01.css.map",
-    "main.d537b590.js.map": "/wedding-invitation/static/js/main.d537b590.js.map"
+    "main.fe1830b9.css.map": "/wedding-invitation/static/css/main.fe1830b9.css.map",
+    "main.0e8c4070.js.map": "/wedding-invitation/static/js/main.0e8c4070.js.map"
   },
   "entrypoints": [
-    "static/css/main.022a5d01.css",
-    "static/js/main.d537b590.js"
+    "static/css/main.fe1830b9.css",
+    "static/js/main.0e8c4070.js"
   ]
 }
