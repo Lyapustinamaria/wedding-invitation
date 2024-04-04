@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import Modal from "react-modal";
 
 const InformationAboutGuests = () => {
 
@@ -14,6 +15,8 @@ const InformationAboutGuests = () => {
         allergy: "",
         hobby: ""
     });
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -48,13 +51,15 @@ const InformationAboutGuests = () => {
         } catch (error) {
             console.error(error);
         }
+
+        setModalIsOpen(true);
     };
 
     return (
         <div class="container-fluid mt-5">
             <div class="row">
                 <div class="col-sm-12">
-                    <h2 class="mb-3">
+                    <h2 class="mb-3 mt-3">
                         Заинтригованы?
                     </h2>
                 </div>
@@ -62,8 +67,11 @@ const InformationAboutGuests = () => {
             <div class="row">
                 <div class="col-sm-12 mb-3">
                     <p>
-                    Оставьте нам основную информацию о себе, чтобы мы могли лучше подготовиться к мероприятию. 
-                    А также следите за нашим телеграм-ботом, он будет присылать вам информацию обо всех обновлениях.
+                    Оставьте нам основную информацию о себе, чтобы мы могли лучше подготовиться к мероприятию.
+                    А также следите за нашим <a href="https://t.me/+HheZe9_kjGQxNjUy" target="_blank">
+                         телеграм-каналом
+                    </a>
+                    , где будет публикаться вся информация об обновлениях.
                     </p>
                 </div>
             </div>
@@ -169,11 +177,11 @@ const InformationAboutGuests = () => {
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <p class='user-form'>
+                            <p class='user-form before-help'>
                                 В каких странах вы будете с нами?
                             </p>
                             <p class="help-text">
-                                Если вы планируете быть с нами в обеих странах, то выбирайте оба вариант.
+                                Если вы планируете быть с нами в обеих странах, то выбирайте оба варианта.
                             </p>
                             <div class="form-check">
                                 <input 
@@ -185,7 +193,7 @@ const InformationAboutGuests = () => {
                                     onChange={handleCheckboxChange} 
                                 />
                                 <label class="form-check-label" for="georgia">
-                                    Грузия
+                                    Грузия (официальная часть)
                                 </label>
                             </div>
                             <div class="form-check">
@@ -198,12 +206,12 @@ const InformationAboutGuests = () => {
                                     onChange={handleCheckboxChange}
                                 />
                                 <label class="form-check-label" for="armenia">
-                                    Армения
+                                    Армения (вечеринка)
                                 </label>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <p class='user-form'>
+                            <p class="more-info">
                                 Пожалуйста, расскажите нам побольше о себе и своем партнере
                             </p>
                             <p class='user-form'>
@@ -221,7 +229,7 @@ const InformationAboutGuests = () => {
                         </div>
                         <div class="mb-3 row">
                             <p class='user-form'>
-                                Какую музыку вы любите? Укажите три свои любимые песни
+                                Какую музыку вы любите? Укажите 6 своих любимых песен: 3 – под которые вам нравится танцевать, и еще 3 – которым вам нравится подпевать.
                             </p>
                             <div class="form">
                                 <input
@@ -234,13 +242,24 @@ const InformationAboutGuests = () => {
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <button type="submit" className="btn btn-primary">
+                            <button className="btn btn-primary submit-button" type="submit">
                                 Отправить
                             </button>
                         </div>
                     </form>
                 </div>
                 <div class="col-sm-3"></div>
+                <Modal
+                    isOpen={modalIsOpen}
+                    class="modal-content"
+                    overlayClassName="modal-overlay"
+                    onRequestClose={() => setModalIsOpen(false)}
+                    contentLabel="Успешная отправка"
+                >
+                    <h3 class="modal-text">Спасибо, что поделились информацией о себе.</h3>
+                    <p class="modal-text">Мы будем с нетерпением ждать на нашей свадьбе!</p>
+                    <button class="btn btn-light" onClick={() => setModalIsOpen(false)}>Закрыть</button>
+                </Modal>
             </div>
         </div>
     )

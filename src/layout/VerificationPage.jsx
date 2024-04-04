@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import {Main} from './Main'
 
+const accessCode = process.env.REACT_APP_ACCESS_CODE;
+console.log(process.env.REACT_APP_ACCESS_CODE);
+
 const VerificationPage = () => {
     const [code, setCode] = useState('');
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -11,7 +14,7 @@ const VerificationPage = () => {
     };
 
     const handleLogin = () => {
-        if (code === '168385782039' || code === '647392765381' || code === '599048828933') {
+        if (code === accessCode) {
             setLoggedIn(true);
         } else {
             alert('К сожалению вы ввели некорректный код доступа. Попробуйсте еще раз.');
@@ -31,9 +34,9 @@ const VerificationPage = () => {
                     <div class="row">
                         <div class="col-2"></div>
                         <div class="col-8">
-                            <h2 class="mb-4">
+                            <h3 class="mb-4">
                                 Чтобы перейти на сайт, введите код, полученный в сообщении
-                            </h2>
+                            </h3>
                             <form>
                                 <div class="mb-3 row">
                                     <label
@@ -55,7 +58,7 @@ const VerificationPage = () => {
                                 <div class="mb-3 row">
                                     <div class="col-sm-10 offset-sm">
                                         <button
-                                            class="btn btn-primary"
+                                            class="btn btn-primary submit-button"
                                             type="submit"
                                             onClick={handleLogin}
                                         >

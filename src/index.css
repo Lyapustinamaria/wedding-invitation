@@ -1,18 +1,9 @@
-@font-face {
-  font-family: 'TT Ramillas';
-  src: url('../public/fonts/TT Ramillas Initials Trial Black.ttf') format('ttf');
-}
-
-
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #FCF7E9;
-  font-family: TT Ramillas;
+  font-family: Oswald;
   color: #343129
 }
 
@@ -32,8 +23,17 @@ code {
 }
 
 h2 {
-  font-size: 48px;
+  font-size: 40px;
   text-align: center;
+}
+
+h3 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.more-info{
+  padding-left: 0;
 }
 
 p {
@@ -43,77 +43,35 @@ p {
 
 label {
   font-size: 20px;
+  font-weight: lighter;
+}
+
+.col-form-label {
+  font-size: 20px;
+  font-weight: lighter;
 }
 
 .user-form{
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
+  font-style: light;
+  font-weight: lighter;
   line-height: normal;
+  margin-bottom: 8px;
+  padding-left: 0;
+}
+
+.form {
+  padding-left: 0;
+}
+
+.with-margin{
+  align-items: center;
 }
 
 .help-text {
   font-size: 14px;
-}
-
-.timeline {
-  position: relative;
-  padding: 20px;
-}
-
-.timeline:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  background-color: #ccc; /* Цвет вертикальной черты */
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 40px; /* Расстояние между элементами */
-}
-
-.timeline-item.right .timeline-content {
-  float: right;
-  clear: both;
-}
-
-.timeline-item.left .timeline-content {
-  float: left;
-  clear: both;
-}
-
-.timeline-content {
-  background-color: #E3DBC5; /* Цвет фона контента */
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень блока */
-}
-
-.timeline-content h3 {
-  margin-top: 0;
-}
-
-.circle {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  background-color: #ccc; /* Цвет кружка */
-  border-radius: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 50%;
-  z-index: 1;
-}
-
-/* Настройки стилей для мобильных устройств */
-@media (max-width: 768px) {
-  .timeline:before {
-    left: 20px;
-  }
+  font-weight: lighter;
+  padding-left: 0;
 }
 
 .image-button {
@@ -130,4 +88,110 @@ label {
 .img-in-button {
   width: 90%;
   height: auto;
+}
+
+.event-block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.event-date {
+  width: 80px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.event-details {
+  flex-grow: 1;
+}
+
+.event-title {
+  text-align: center;
+}
+
+.event-text {
+  text-align: justify;
+}
+
+.event-block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.event-date {
+  margin-right: 20px;
+  border-right: 2px solid black;
+  padding-right: 20px; /* Добавляем немного отступа между датой и вертикальной чертой */
+}
+
+.event-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-title,
+.event-text {
+  margin: 0;
+}
+
+.submit-button {
+  background-color: #679936;
+  border-color: #679936;
+}
+
+.submit-button:hover {
+  background-color: #4B6F27; 
+  border-color: #4B6F27;
+}
+
+.submit-button:focus,
+.submit-button:active {
+    background-color: #4B6F27;
+    border-color: #4B6F27;
+}
+
+.before-help {
+  margin-bottom: 0;
+}
+
+a {
+  color: #679936;
+  text-decoration: none;
+} 
+
+a:focus, 
+a:hover {
+  color: #4B6F27;
+}
+
+input::placeholder{
+  font-weight: lighter;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+}
+
+.form-check-input {
+  margin-right: 12px; /* Расстояние между инпутом и лейблом */
+}
+
+.form-check-input:checked{
+  background-color: #679936;
+  border-color: #679936;
+}
+
+.modal-content {
+  width: 150px;
+  height: 200px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Тень */
+  border-radius: 30px; /* Бордер-радиус */
+  background-color: #E5DFCD; /* Цвет фона */
+}
+
+.modal-text{
+  text-align: center;
 }
